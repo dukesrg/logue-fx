@@ -8,7 +8,9 @@
  *
  */
 
-#include "hyper.hpp"
+#include "buffer_ops.h"
+#include "fxwrapper.h"
+#include "osc_api.h"
 #include <algorithm>
 
 #define F_FACTOR 1.0594631f //chromatic semitone frequency factor
@@ -69,9 +71,11 @@ FX_PARAM
   case FX_PARAM_DEPTH: //unison voices
     s_unison = 2 * (1 + clipmaxf(si_floorf(valf * MAX_UNISON), MAX_UNISON - 1));
     break;
+#ifndef FX_MODFX
   case FX_PARAM_SHIFT_DEPTH:
     s_wet = valf;
     break;
+#endif
   default:
     break;
   }
