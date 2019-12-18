@@ -1,10 +1,25 @@
-## Loop recorder for revfx
+# Loop recorder
 
-This is a Kaossilator-style stereo loop recorded for revfx slot.
+This is a Kaossilator-style loop recorded for revfx slot.
 
-Parameters:
-* time (A knob) : loop length linked to current BPM and sticked to 1/16, 1/8, 1/4, 1/2, 1, 2, 4, 8, 16 beats. Length reduced dynamically depending on BPM change due to available SDRAM size limit.
-* depth (B knob) :
-  * 0...33 : overwrite - 50/50 mixed input and delay buffer passed to the output, input rewrites the delay buffer.
-  * 34...66 : play - 50/50 mixed input and delay buffer passed to the output, delay buffer untouched.
-  * 67...100 : overdub - 50/50 mixed input and delay buffer passed to the output, input added to the delay buffer.
+## Parameters
+* Loop length (time / A knob) - linked to the current BPM and sticked to 16, 8, 4, 2, 1, ½, ¼, ⅛, 1⁄16 beats
+* Play/Record mode (depth / B knob)
+  * Overwrite (0...33) - 50/50 mixed input and delay buffer passed to the output, input rewrites the delay buffer
+  * Play (34...66) - 50/50 mixed input and delay buffer passed to the output, delay buffer untouched
+  * Overdub (67...100) - 50/50 mixed input and delay buffer passed to the output, input added to the delay buffer
+* Record format (shift depth / FX button + B knob)
+  * Stereo (0...24) - full quality
+  * Stereo packed (25...49) - reduced quality
+  * Mono (50...74) - 50/50 channel mix, full quality
+  * Mono packed (75...100) - 50/50 channel mix, reduced quality
+  
+
+Due to  SDRAM size limitation loop length automatically limited depending on the record format and current BPM according to the table:
+
+|Record format|BPM < 75|75 ≤ BPM < 150| 
+|-|-|-|
+|Stereo|4 beats max|8 beats max|
+|Stereo packed|8 beats max|-
+|Mono|8 beats max|-
+|Mono packed|-|-
