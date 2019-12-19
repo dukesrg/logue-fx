@@ -1,6 +1,6 @@
 # Loop recorder
 
-This is a Kaossilator-style loop recorded for revfx slot.
+This is a Kaossilator-style loop recorded for Delay FX and Reverb FX.
 
 ## Parameters
 * Loop length (time / A knob) - linked to the current BPM and sticked to 16, 8, 4, 2, 1, ½, ¼, ⅛, 1⁄16 beats
@@ -13,11 +13,11 @@ This is a Kaossilator-style loop recorded for revfx slot.
   * Stereo packed (25...49) - reduced quality
   * Mono (50...74) - 50/50 channel mix, full quality
   * Mono packed (75...100) - 50/50 channel mix, reduced quality
-  
+
 
 Due to  SDRAM size limitation loop length automatically limited depending on the record format and current BPM according to the table:
 
-|Record format|BPM < 75|75 ≤ BPM < 150| 
+|Record format|BPM < 75|75 ≤ BPM < 150|
 |-|-|-|
 |Stereo|4 beats max|8 beats max|
 |Stereo packed|8 beats max|-
