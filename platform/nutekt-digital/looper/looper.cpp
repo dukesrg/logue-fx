@@ -18,7 +18,7 @@ static int s_beats;
 static int s_mix_mode;
 static int s_record_format;
 
-void FX_INIT(uint32_t platform, uint32_t api)
+FX_INIT
 {
   s_delay.setMemory(s_delay_ram, BUF_SIZE * 2);
   s_beats = BEAT_STEPS - 1;
@@ -26,7 +26,7 @@ void FX_INIT(uint32_t platform, uint32_t api)
   s_record_format = record_format_stereo;
 }
 
-void FX_PROCESS(float *xn, uint32_t frames)
+FX_PROCESS
 {
   float * __restrict x = xn;
   const float * x_e = x + 2 * frames;
@@ -84,7 +84,7 @@ void FX_PROCESS(float *xn, uint32_t frames)
   }
 }
 
-void FX_PARAM(uint8_t index, int32_t value)
+FX_PARAM
 {
   const float valf = q31_to_f32(value);
   switch (index) {

@@ -15,29 +15,32 @@
 #include "float_math.h"
 #include "osc_api.h"
 
-#define XSTR(x) STR(x)
-#define STR(x) #x
+#define modfx 1
+#define delfx 2
+#define revfx 3
+#define osc 4
 
-#if fxtype==delfx
+#if module == delfx
+  #pragma message "Compiling Delay FX"
   #include "userdelfx.h"
-  #define FX_INIT DELFX_INIT
-  #define FX_PROCESS DELFX_PROCESS
-  #define FX_PARAM DELFX_PARAM
+  #define FX_INIT void DELFX_INIT(uint32_t platform, uint32_t api)
+  #define FX_PROCESS void DELFX_PROCESS(float *xn, uint32_t frames)
+  #define FX_PARAM void DELFX_PARAM(uint8_t index, int32_t value)
   #define FX_PARAM_TIME k_user_delfx_param_time
   #define FX_PARAM_DEPTH k_user_delfx_param_depth
   #define FX_PARAM_SHIFT_DEPTH k_user_delfx_param_shift_depth
-#elif fxtype==revfx
+#elif module == revfx
+  #pragma message "Compiling Reverb FX"
   #include "userrevfx.h"
-  #define FX_INIT REVFX_INIT
-  #define FX_PROCESS REVFX_PROCESS
-  #define FX_PARAM REVFX_PARAM
+  #define FX_INIT void REVFX_INIT(uint32_t platform, uint32_t api)
+  #define FX_PROCESS void REVFX_PROCESS(float *xn, uint32_t frames)
+  #define FX_PARAM void REVFX_PARAM(uint8_t index, int32_t value)
   #define FX_PARAM_TIME k_user_revfx_param_time
   #define FX_PARAM_DEPTH k_user_revfx_param_depth
   #define FX_PARAM_SHIFT_DEPTH k_user_revfx_param_shift_depth
 #else
-#error "Wrong FX type " XSTR(fxtype)
+  #error "Wrong module"
 #endif
-#pragma message  "Compiling FX type " XSTR(fxtype)
 
 #include "delayline.hpp"
 
