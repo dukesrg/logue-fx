@@ -1,5 +1,5 @@
 /*
- * File: looper.hpp
+ * File: looper.hppOD
  *
  * Kaossilator-style loop recorder for Delay FX and Reverb FX
  * 
@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include "buffer_ops.h"
 #include "fx_api.h"
 #include "fixed_math.h"
 #include "float_math.h"
@@ -23,7 +24,7 @@
 #if module == delfx
   #pragma message "Compiling Delay FX"
   #include "userdelfx.h"
-  #define FX_INIT void DELFX_INIT(uint32_t platform, uint32_t api)
+  #define FX_INIT void DELFX_INIT(__attribute__((unused)) uint32_t platform, __attribute__((unused)) uint32_t api)
   #define FX_PROCESS void DELFX_PROCESS(float *xn, uint32_t frames)
   #define FX_PARAM void DELFX_PARAM(uint8_t index, int32_t value)
   #define FX_PARAM_TIME k_user_delfx_param_time
@@ -32,7 +33,7 @@
 #elif module == revfx
   #pragma message "Compiling Reverb FX"
   #include "userrevfx.h"
-  #define FX_INIT void REVFX_INIT(uint32_t platform, uint32_t api)
+  #define FX_INIT void REVFX_INIT(__attribute__((unused)) uint32_t platform, __attribute__((unused)) uint32_t api)
   #define FX_PROCESS void REVFX_PROCESS(float *xn, uint32_t frames)
   #define FX_PARAM void REVFX_PARAM(uint8_t index, int32_t value)
   #define FX_PARAM_TIME k_user_revfx_param_time
@@ -41,8 +42,6 @@
 #else
   #error "Wrong module"
 #endif
-
-#include "delayline.hpp"
 
 #define MAX_MEM (2400 * 1024) // exact BPM limits, 32K reserved
 #define BUF_SIZE (MAX_MEM / (sizeof(float) * 2)) // loop buffer size in samples, stereo
@@ -65,14 +64,11 @@ enum {
   record_format_count
 };
 
-typedef union {
-  float f;
-  struct {
-    q15_t a;
-    q15_t b;
-  } q;
-} __attribute__ ((packed)) f32packed_t;
+typedef struct {
+  q15_t a;
+  q15_t b;
+} __attribute__ ((packed)) q15pair_t;
 
-#define f32pack(f1,f2) (f32packed_t){.q={f32_to_q15(f1),f32_to_q15(f2)}}.f
-#define f32unpack1(f1) (q15_to_f32(((f32packed_t){.f=f1}).q.a))
-#define f32unpack2(f1) (q15_to_f32(((f32packed_t){.f=f1}).q.b))
+#define f32pair_to_q15pair(fp) ((q15pair_t){f32_to_q15((fp).a),f32_to_q15((fp).b)})
+#define q15pair_to_f32pair(qp) ((f32pair_t){q15_to_f32((qp).a),q15_to_f32((qp).b)})
+#define q15pair_add(q1,q2) ((q15pair_t){q15add(q1.a,q2.a),q15add(q1.b,q2.b)})
