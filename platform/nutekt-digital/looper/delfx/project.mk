@@ -12,7 +12,7 @@ UCXXSRC = $(PROJECTDIR)/../looper.cpp
 
 UINCDIR =
 
-UDEFS = -Dmodule=delfx
+UDEFS = -DUSER_TARGET_MODULE=k_user_module_delfx -DUSER_TARGET_PLATFORM=k_user_target_nutektdigital
 
 ULIB =
 
