@@ -63,7 +63,7 @@ FX_PARAM
     valf *= MAX_DETUNE;
     for (uint32_t i = 0; i < MAX_UNISON; i++) {
       s_speed[i * 2] = powf(F_FACTOR, valf * (i + 1));
-      s_speed[i * 2 + 1] = 1.f / s_speed[i];
+      s_speed[i * 2 + 1] = 1.f / s_speed[i * 2];
     }
     break;
   case FX_PARAM_DEPTH: //unison voices
