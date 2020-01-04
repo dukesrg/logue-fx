@@ -3,7 +3,7 @@
 This is a bit crusher and decimator effect for Delay FX and Reverb FX.
 
 ## Parameters
-* Sampling frequency (time / A knob) - 48kHZ...480Hz sample rate reduce
+* Sampling frequency (time / A knob) - 48000...480Hz sample rate reduce
 * Bit depth (depth / B knob) - 24...1 bit resolution reduce
 * Dry/wet mix (shift depth / FX button + B knob)
 
