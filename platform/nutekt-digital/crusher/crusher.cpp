@@ -9,11 +9,10 @@
  */
 
 #include "crusher.hpp"
+#include "osc_api.h"
 
 #define MIN_RATE 480 //minimum sampling rate
 #define MAX_RATE k_samplerate //maximum sampling rate
-#define MIN_BITS 1 //minimum bits
-#define MAX_BITS 24 //maximum bits
 
 static float s_rate;
 static float s_rate_recip;
@@ -21,6 +20,7 @@ static float s_count;
 static f32pair_t s_acc;
 static f32pair_t s_val;
 static float s_bits;
+static float s_bits_recip;
 static float s_wet;
 static float s_weight;
 
@@ -31,7 +31,8 @@ FX_INIT
   s_count = 1.f;
   s_acc = f32pair(0.f, 0.f);
   s_val = f32pair(0.f, 0.f);
-  s_bits = MAX_BITS - 1;
+  s_bits = 24.f;
+  s_bits_recip = 1 / s_bits;
   s_wet = .5f;
   s_weight = 0.f;
 }
@@ -48,17 +49,17 @@ FX_PROCESS
     }
     f32pair_t y = s_val;
     s_count++;
-    if (s_bits < MAX_BITS) {
+    if (s_bits < 24.f) {
       if (y.a > 0.f)
-        y.a = ceilf(y.a * s_bits) / s_bits;
+        y.a = ceilf(y.a * s_bits) * s_bits_recip;
       else if (y.a < 0.f)
-        y.a = floorf(y.a * s_bits) / s_bits;
+        y.a = floorf(y.a * s_bits) * s_bits_recip;
       if (y.b > 0.f)
-        y.b = ceilf(y.b * s_bits) / s_bits;
+        y.b = ceilf(y.b * s_bits) * s_bits_recip;
       else if (y.b < 0.f)
-        y.b = floorf(y.b * s_bits) / s_bits;
+        y.b = floorf(y.b * s_bits) * s_bits_recip;
+      *x = f32pair_linint(s_wet, *x, y);
     }
-    *x = f32pair_linint(s_wet, *x, y);
 /*
     float y = *x * s_bits;
     if (y > 0.f)
@@ -82,7 +83,8 @@ FX_PARAM
     s_rate_recip = 1 / s_rate;
     break;
   case FX_PARAM_DEPTH: //bit resolution reduce
-    s_bits = powf(2.f, MAX_BITS - (valf * (MAX_BITS - MIN_BITS)) - 1);
+    s_bits = powf(2.f, osc_bitresf(valf) - 1);
+    s_bits_recip = 1 / s_bits;
     break;
   case FX_PARAM_SHIFT_DEPTH:
     s_wet = valf;
