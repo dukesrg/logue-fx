@@ -58,8 +58,8 @@ FX_PARAM
     s_rate = clipmaxf(1.f / (1.f - valf), k_samplerate / MIN_RATE);
     break;
   case FX_PARAM_DEPTH: //bit resolution reduce
-    s_bits = powf(2.f, fx_bitresf(valf) - 1);
-    s_bits_recip = 1 / s_bits;
+    s_bits = fx_bitresf(valf);
+    s_bits_recip = 1.f / s_bits;
     break;
   case FX_PARAM_SHIFT_DEPTH:
     s_wet = valf;
