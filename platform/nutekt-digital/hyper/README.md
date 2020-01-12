@@ -1,6 +1,6 @@
 # Hyper
 
-This is a unison effect inspired by supersaw/hypersaw for Delay FX and Reverb FX.
+This is a unison effect inspired by supersaw/hypersaw for Modulation FX, Delay FX and Reverb FX.
 
 ## Parameters
 * Detune (time / A knob) - detune value in 0...1 semitone
