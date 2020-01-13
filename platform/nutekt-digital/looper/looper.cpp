@@ -8,7 +8,39 @@
  *
  */
 
-#include "looper.hpp"
+#include "buffer_ops.h"
+#include "fxwrapper.h"
+#include "osc_api.h"
+
+enum {
+  mix_mode_overwrite = 0,
+  mix_mode_play,
+  mix_mode_overdub,
+  mix_mode_count
+};
+
+enum {
+  record_format_stereo = 0,
+  record_format_stereo_packed,
+  record_format_mono,
+  record_format_mono_packed,
+  record_format_count
+};
+
+typedef struct {
+  q15_t a;
+  q15_t b;
+} __attribute__ ((packed)) q15pair_t;
+
+#define f32pair_to_q15pair(fp) ((q15pair_t){f32_to_q15((fp).a),f32_to_q15((fp).b)})
+#define q15pair_to_f32pair(qp) ((f32pair_t){q15_to_f32((qp).a),q15_to_f32((qp).b)})
+#define q15pair_add(q1,q2) ((q15pair_t){q15add(q1.a,q2.a),q15add(q1.b,q2.b)})
+
+#define MAX_MEM (2400 * 1024) // exact BPM limits, 32K reserved
+#define BUF_SIZE (MAX_MEM / (sizeof(float) * 2)) // loop buffer size in samples, stereo
+#define BEAT_MAX 16 // maximum loop length, beats
+#define BEAT_MIN 16 // minimum loop length, beat fractions
+#define BEAT_STEPS 9 // precalculated = log2(BEAT_MAX * BEAT_MIN) + 1
 
 static __sdram float s_loop_ram[BUF_SIZE * 2];
 static uint32_t s_loop_pos;
