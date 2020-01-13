@@ -2,9 +2,9 @@
 # Project Customization
 # #############################################################################
 
-include $(PLATFORMDIR)/revfx.mk
+include $(PLATFORMDIR)/modfx.mk
 
-PROJECT = Vibrator-revfx
+PROJECT = Vibrator-modfx
 
 UCSRC =
 

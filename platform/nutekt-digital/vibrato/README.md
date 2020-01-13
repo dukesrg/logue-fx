@@ -1,6 +1,6 @@
-# Vibrato
+# Vibrator
 
-This is a vibrato effect with pitch shift for Delay FX and Reverb FX.
+This is a vibrato effect with pitch shift for Modulation FX, Delay FX and Reverb FX.
 
 ## Parameters
 * Vibrato rate (time / A knob) - 0...30 Hz

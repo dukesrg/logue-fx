@@ -4,11 +4,11 @@
 
 include $(PLATFORMDIR)/delfx.mk
 
-PROJECT = Vibrato-delfx
+PROJECT = Vibrator-delfx
 
 UCSRC =
 
-UCXXSRC = $(PROJECTDIR)/../vibrato.cpp
+UCXXSRC = $(PROJECTDIR)/../vibrator.cpp
 
 UINCDIR =
 
