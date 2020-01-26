@@ -1,6 +1,6 @@
 # Kompressor
 
-This is a simple peak downward compressor/expander for Modulation FX, Delay FX and Reverb FX.
+This is RMS downward compressor/expander for Modulation FX, Delay FX and Reverb FX.
 
 ## Parameters
 * Threshold level (time / A knob) - -80...0dB
