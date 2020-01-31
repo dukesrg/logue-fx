@@ -1,67 +1,40 @@
 # logue-fx
 Custom effects for Korg logue-sdk compatible synths
 
-This projects depends on customized logue-sdk version
+You can get the lastest precompiled versions of the effects in [releases](../../releases/) section.
 
-# Crusher
+### Project structure
 
-This is a bit crusher and decimator effect for Modulation FX, Delay FX and Reverb FX.
+* [lodue-sdk/](logue-sdk/) : My own logue-sdk fork with optimized makefiles and reduced project footprint.
+* [inc/fxwrapper.h](inc/fxwrapper.h) : FX wrapper that allows to make all effect types from one source file.
+* [src/](src/) : Effects source files.
+* ...fx/ : Effects project files.
 
-## Parameters
-* Sampling frequency (time / A knob) - 48000...480Hz sample rate reduce
-* Bit depth (depth / B knob) - 24...1 bit resolution reduce
-* Dry/wet mix (shift depth / FX button + B knob)
 
-## Limitations
-Dry/wet parameter is not available for Modulation FX.
-On the Korg NTS-1 the analog input noise got aplificated by very low bit resolution setting which produces very nasty effect.
-To avoid this either:
-* make sure actual signal is present on audio input, not silence
-* route audio input after the effect
+### Effects description
+* Crusher - Bit crusher and decimator effect.
+* Gator - Kaossilator-style gate arpeggiator.
+* Hyper - unison effect inspired by supersaw/hypersaw.
+* Kompressor - RMS downward compressor/expander.
+* Looper - Kaossilator-style loop recorder.
+* Vibrator - frequency vibrato and pitch shift effect.
 
-# Gator
+### Effects Parameters
+|Effect |time / A knob|depth / B knob|shift depth / FX button + B knob|
+|-|-|-|-|
+|Crusher|Sampling frequency - 48000...480Hz|Bit depth - 24...1 bit|Dry/wet mix|
+|Gator|Pattern select - [KAOSSILATOR Parameter List](https://www.korg.com/us/support/download/manual/1/121/1774/)|Pattern restart - pass center point|-|
+|Hyper|Detune - 0...1 semitone|Unision voices - 1 to 12 pairs, each pair detuned by additional +/- detune value|Dry/wet mix|
+|Kompressor|Threshold level - -80...0dB|Ratio<br>- expand ∞:1...1:1 (left to center)<br>- compress 1:1...∞:1 (center to right)|Dry/wet mix|
+|Looper|Loop length - linked to the current BPM and sticked to<br>16, 8, 4, 2, 1, ½, ¼, ⅛, 1⁄16 beats|Play/Record mode<br>- Overwrite (left third)<br>- Play (center third)<br>- Overdub (right third)|Record format <br>- Stereo (d100-d50)<br>- Stereo packed (d49-d0)<br>- Mono (w0-w49)<br>- Mono packed (w50-w100)|
+|Vibrator|Vibrato rate - 0...30Hz|Vibrato depth - 0...1 semitone|Pitch shift - -12...+12 semitones|
 
-This is a Kaossilator-style gate arpeggiator.
-
-## Parameters
-* Pattern select (time / A knob) - refer to [KAOSSILATOR Parameter List](https://www.korg.com/us/support/download/manual/1/121/1774/) for patterns
-* Pattern restart (depth / B knob) - pass center point to restart pattern for manual beat sync
-
-# Hyper
-
-This is a unison effect inspired by supersaw/hypersaw for Modulation FX, Delay FX and Reverb FX.
-
-## Parameters
-* Detune (time / A knob) - detune value in 0...1 semitone
-* Unision voices (depth / B knob) - 1 to 12 pairs, each pair detuned by additional +/- detune value
-* Dry/wet mix (shift depth / FX button + B knob)
-
-# Kompressor
-
-This is RMS downward compressor/expander for Modulation FX, Delay FX and Reverb FX.
-
-## Parameters
-* Threshold level (time / A knob) - -80...0dB
-* Ratio (depth / B knob) - (noise gate)∞:1...(expand)...1:1...(compress)...∞:1(limiter)
-* Dry/wet mix (shift depth / FX button + B knob)
-
-# Looper
-
-This is a Kaossilator-style loop recorded for Delay FX and Reverb FX.
-
-## Parameters
-* Loop length (time / A knob) - linked to the current BPM and sticked to 16, 8, 4, 2, 1, ½, ¼, ⅛, 1⁄16 beats
-* Play/Record mode (depth / B knob)
-  * Overwrite (left third) - 50/50 mixed input and delay buffer passed to the output, input rewrites the delay buffer
-  * Play (center third) - 50/50 mixed input and delay buffer passed to the output, delay buffer untouched
-  * Overdub (right third) - 50/50 mixed input and delay buffer passed to the output, input added to the delay buffer
-* Record format (shift depth / FX button + B knob)
-  * Stereo (d100-d50) - full quality
-  * Stereo packed (d49-d0) - reduced quality
-  * Mono (w0-w49) - 50/50 channel mix, full quality
-  * Mono packed (w50-w100) - 50/50 channel mix, reduced quality
-
-Due to  SDRAM size limitation loop length automatically limited depending on the record format and current BPM according to the table:
+### Notes
+* Most of the effects for all three effect slots.
+* Existing projects are configured to make NTS-1 effect packages but source code respect Prologue Mod FX sub timbre processing. Altering Makefile will produce a fully functional packages for Prologue. The logue-sdk fork is still WIP so someday it will be possible to make all the variants at once.
+* The third effect parameter control is not available for Modulation FX thus several effects are limited in control in this slot.
+* On NTS-1 crusher effect may produce very nasty sound due to the analog input noise got aplificated by very low bit resolution parameter setting. To avoid this either make sure actual signal is present on audio input (i.e. not silence) or route audio input after the effect.
+* Due to NTS-1 SDRAM size limitation loop length automatically reduced depending on the record format and current BPM according to the table below:
 
 |Record format|BPM < 75|75 ≤ BPM < 150|
 |-|-|-|
@@ -69,12 +42,3 @@ Due to  SDRAM size limitation loop length automatically limited depending on the
 |Stereo packed|8 beats max|-
 |Mono|8 beats max|-
 |Mono packed|-|-
-
-# Vibrator
-
-This is a vibrato effect with pitch shift for Modulation FX, Delay FX and Reverb FX.
-
-## Parameters
-* Vibrato rate (time / A knob) - 0...30 Hz
-* Vibrato depth (depth / B knob) - 0...1 semitone
-* Pitch shift (shift depth / FX button + B knob) - -12...+12 semitones
