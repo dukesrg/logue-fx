@@ -1,0 +1,3 @@
+[submodule "logue-sdk"]
+	path = logue-sdk
+	url = https://github.com/dukesrg/logue-sdk
