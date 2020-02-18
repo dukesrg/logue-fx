@@ -69,13 +69,13 @@ FX_PROCESS
 #endif
     if (s_bits_recip != 0.f) {
       valp = f32pair_mulscal(valp, s_bits);
-      valp.a = valp.a < 0.f ? floorf(valp.a) : ceilf(valp.a);
-      valp.b = valp.b < 0.f ? floorf(valp.b) : ceilf(valp.b);
+      valp.a = si_roundf(valp.a);
+      valp.b = si_roundf(valp.b);
       valp = f32pair_mulscal(valp, s_bits_recip);
 #ifdef FX_MODFX_SUB
       valp_sub = f32pair_mulscal(valp_sub, s_bits);
-      valp_sub.a = valp_sub.a < 0.f ? floorf(valp_sub.a) : ceilf(valp_sub.a);
-      valp_sub.b = valp_sub.b < 0.f ? floorf(valp_sub.b) : ceilf(valp_sub.b);
+      valp_sub.a = si_roundf(valp_sub.a);
+      valp_sub.b = si_roundf(valp_sub.b);
       valp_sub = f32pair_mulscal(valp_sub, s_bits_recip);
 #endif
     }
