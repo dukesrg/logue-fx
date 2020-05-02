@@ -31,9 +31,7 @@ You can get the lastest precompiled versions of the effects in [releases](../../
 
 ### Notes
 * Most of the effects for all three effect slots.
-* Existing projects are configured to make NTS-1 effect packages but source code respect Prologue Mod FX sub timbre processing. Altering Makefile will produce a fully functional packages for Prologue. The logue-sdk fork is still WIP so someday it will be possible to make all the variants at once.
 * The third effect parameter control is not available for Modulation FX thus several effects are limited in control in this slot.
-* On NTS-1 crusher effect may produce very nasty sound due to the analog input noise got aplificated by very low bit resolution parameter setting. To avoid this either make sure actual signal is present on audio input (i.e. not silence) or route audio input after the effect.
 * Due to NTS-1 SDRAM size limitation loop length automatically reduced depending on the record format and current BPM according to the table below:
 
 |Record format|BPM < 75|75 ≤ BPM < 150|
