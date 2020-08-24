@@ -18,6 +18,7 @@ You can get the lastest precompiled versions of the effects in [releases](../../
 * Kompressor - RMS downward compressor/expander.
 * Looper - Kaossilator-style loop recorder.
 * Vibrator - frequency vibrato and pitch shift effect.
+* LFO - frequency and amplitude vibrato with selectable waveform.
 
 ### Effects Parameters
 |Effect |time / A knob|depth / B knob|shift depth / FX button + B knob|
@@ -28,6 +29,7 @@ You can get the lastest precompiled versions of the effects in [releases](../../
 |Kompressor|Threshold level - -80...0dB|Ratio<br>- expand ∞:1...1:1 (left to center)<br>- compress 1:1...∞:1 (center to right)|Dry/wet mix|
 |Looper|Loop length - linked to the current BPM and sticked to<br>16, 8, 4, 2, 1, ½, ¼, ⅛, 1⁄16 beats|Play/Record mode<br>- Overwrite (left third)<br>- Play (center third)<br>- Overdub (right third)|Record format <br>- Stereo (d100-d50)<br>- Stereo packed (d49-d0)<br>- Mono (w0-w49)<br>- Mono packed (w50-w100)|
 |Vibrator|Vibrato rate - 0...30Hz|Vibrato depth - 0...1 semitone|Pitch shift - -12...+12 semitones|
+|LFO|Vibrato rate - 0...30Hz|Vibrato depth - 0...1 semitone|Vibrato type<br>- AMod Sine (d100-d80)<br>- AMod Triangle (d79-d60)<br>- AMod Saw (d59-d40)<br>- AMod Square (d39-d20)<br>- AMod S&H (d19-d0)<br>- PMod Sine (w0-d19)<br>- PMod Triangle (w20-w39)<br>- PMod Saw (w40-w59)<br>- PMod Square (w60-w79)<br>- PMod S&H (w80-w100)|
 
 ### Notes
 * Most of the effects for all three effect slots.
