@@ -10,12 +10,11 @@ You can get the lastest precompiled versions of the effects in [releases](../../
 * [src/](src/) : Effects source files.
 * ...fx/ : Effects project files.
 
-
 ### Effects description
 * Crusher - Bit crusher and decimator effect.
 * Gator - Kaossilator-style gate arpeggiator.
 * Hyper - unison effect inspired by supersaw/hypersaw.
-* Kompressor - RMS downward compressor/expander.
+* Kompressor - Peak downward compressor/expander.
 * Looper - Kaossilator-style loop recorder.
 * Vibrator - frequency vibrato and pitch shift effect.
 * LFO - frequency and amplitude vibrato with selectable waveform.
