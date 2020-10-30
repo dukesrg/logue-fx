@@ -1,7 +1,7 @@
 # logue-fx
 Custom effects for Korg logue-sdk compatible synths
 
-You can get the latest pre-compiled versions of the effects in [releases](../../releases/) section.
+You can get the latest pre-compiled versions of the effects in the [releases](../../releases/) section.
 
 ### Project structure
 
