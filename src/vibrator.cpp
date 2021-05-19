@@ -29,6 +29,15 @@ static float s_read_pos;
 static uint32_t s_write_pos;
 static dsp::SimpleLFO s_lfo;
 static __sdram f32pair_t s_loop[BUF_SIZE];
+/*
+static __sdram uint16_t s_prev_grain_a[BUF_SIZE];
+static __sdram uint16_t s_prev_grain_b[BUF_SIZE];
+static __sdram uint16_t s_next_grain_a[BUF_SIZE];
+static __sdram uint16_t s_next_grain_b[BUF_SIZE];
+static f32pair_t s_prev_val;
+static uint16_t s_prev_grain_pos_a;
+static uint16_t s_prev_grain_pos_b;
+*/
 #ifdef FX_MODFX_SUB
 static __sdram f32pair_t s_loop_sub[BUF_SIZE];
 #endif
@@ -121,6 +130,14 @@ FX_INIT
 #ifdef FX_MODFX_SUB
   buf_clr_f32((float*)s_loop_sub, BUF_SIZE * sizeof(f32pair_t)/sizeof(float));
 #endif
+  for (uint32_t i = 0; i < BUF_SIZE; i++) {
+    s_prev_grain_a[i] = 0xFFFF;
+    s_next_grain_a[i] = 0xFFFF;
+    s_prev_grain_b[i] = 0xFFFF;
+    s_next_grain_b[i] = 0xFFFF;
+  }
+  s_prev_grain_pos_a = 0xFFFF;
+  s_prev_grain_pos_b = 0xFFFF;
 }
 
 FX_PROCESS
@@ -160,19 +177,51 @@ FX_PROCESS
 #else
   for (f32pair_t * __restrict x = (f32pair_t*)xn; frames--; x++) {
 #endif
+/*
+if (s_grain_count == 0) {
+  *(y++) = 0.f;
+} else {
+
+}
+*/
     uint32_t pos = (uint32_t)s_read_pos;
 #ifdef FX_MODFX_SUB
     f32pair_t valp_sub = *x_sub;
-    *(y_sub++) = f32pair_linint(s_read_pos - pos, s_loop_sub[pos], s_loop_sub[pos < BUF_SIZE ? pos : 0]);
+    *(y_sub++) = f32pair_linint(s_read_pos - pos, s_loop_sub[pos], s_loop_sub[pos < BUF_SIZE ? pos + 1: 0]);
     s_loop_sub[s_write_pos] = valp_sub;
 #endif
     f32pair_t valp = *x;
 #ifdef FX_MODFX
-    *(y++) = f32pair_linint(s_read_pos - pos, s_loop[pos], s_loop[pos < BUF_SIZE ? pos : 0]);
+    *(y++) = f32pair_linint(s_read_pos - pos, s_loop[pos], s_loop[pos < BUF_SIZE ? pos + 1: 0]);
 #else
-    *x = f32pair_linint(s_read_pos - pos, s_loop[pos], s_loop[pos < BUF_SIZE ? pos : 0]);
+    *x = f32pair_linint(s_read_pos - pos, s_loop[pos], s_loop[pos < BUF_SIZE ? pos + 1: 0]);
 #endif
     s_loop[s_write_pos] = valp;
+/*
+if (s_prev_val.a < 0.f && valp.a >= 0.f) {
+  s_prev_grain_a[s_write_pos] = s_prev_grain_pos_a;
+  if (s_prev_grain_pos_a != 0xFFFF)
+    s_next_grain_a[s_prev_grain_pos_a] = s_write_pos;
+  s_prev_grain_pos_a = s_write_pos;
+} else {
+  s_prev_grain_a[s_write_pos] = 0xFFFF;
+  if (s_next_grain_a[s_write_pos] != 0xFFFF)
+    s_prev_grain_a[s_next_grain_a[s_write_pos]] = 0xFFFF;
+  s_next_grain_a[s_write_pos] = 0xFFFF;
+}
+if (s_prev_val.b < 0.f && valp.b >= 0.f) {
+  s_prev_grain_b[s_write_pos] = s_prev_grain_pos_b;
+  if (s_prev_grain_pos_b != 0xFFFF)
+    s_next_grain_b[s_prev_grain_pos_b] = s_write_pos;
+  s_prev_grain_pos_b = s_write_pos;
+} else {
+  s_prev_grain_b[s_write_pos] = 0xFFFF;
+  if (s_next_grain_b[s_write_pos] != 0xFFFF)
+    s_prev_grain_b[s_next_grain_a[s_write_pos]] = 0xFFFF;
+  s_next_grain_b[s_write_pos] = 0xFFFF;
+}
+s_prev_val = valp;
+*/
 #ifdef VIBRATORv2
     s_read_pos += fastpowf(F_FACTOR, (*func_lfo)() * s_depth);
 #else
@@ -180,6 +229,15 @@ FX_PROCESS
 #endif
     if ((uint32_t)s_read_pos >= BUF_SIZE)
       s_read_pos -= BUF_SIZE;
+/*
+if (s_prev_grain_a[(uint32_t)s_read_pos] != 0xFFFF && s_prev_grain_a[s_prev_grain_a[(uint32_t)s_read_pos]] == 0xFFFF) {
+//  while (s_next_grain_a[(uint32_t)s_read_pos] != 0xFFFF)
+    s_read_pos = s_next_grain_a[(uint32_t)s_read_pos];
+} else if (s_next_grain_a[(uint32_t)s_read_pos] != 0xFFFF && s_next_grain_a[s_next_grain_a[(uint32_t)s_read_pos]] == 0xFFFF) {
+//  while (s_prev_grain_a[(uint32_t)s_read_pos] != 0xFFFF)
+    s_read_pos = s_prev_grain_a[(uint32_t)s_read_pos];
+}
+*/
     s_write_pos++;
     if (s_write_pos >= BUF_SIZE)
       s_write_pos = 0;
