@@ -130,6 +130,7 @@ FX_INIT
 #ifdef FX_MODFX_SUB
   buf_clr_f32((float*)s_loop_sub, BUF_SIZE * sizeof(f32pair_t)/sizeof(float));
 #endif
+/*
   for (uint32_t i = 0; i < BUF_SIZE; i++) {
     s_prev_grain_a[i] = 0xFFFF;
     s_next_grain_a[i] = 0xFFFF;
@@ -138,6 +139,7 @@ FX_INIT
   }
   s_prev_grain_pos_a = 0xFFFF;
   s_prev_grain_pos_b = 0xFFFF;
+*/
 }
 
 FX_PROCESS
