@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"ms-vscode.cpptools",
+		"marus25.cortex-debug",
+		"marus25.cortex-debug-dp-stm32f4"
+	],
+	"unwantedRecommendations": [
+	
+	]
+}

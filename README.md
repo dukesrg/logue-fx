@@ -5,6 +5,7 @@ You can get the latest pre-compiled versions of the effects in the [releases](..
 
 ### Project structure
 
+* [.vscode/](.vscode/) : Visual Studio Code workspace configuration files. Optional, for additional info refer to [logue-sdk-vscode](https://github.com/dukesrg/logue-sdk-vscode) template documentation.
 * [lodue-sdk/](logue-sdk/) : My own logue-sdk fork with optimized Makefiles, and reduced project footprint.
 * [inc/fxwrapper.h](inc/fxwrapper.h) : FX wrapper that allows creating all effect types from one source file.
 * [src/](src/) : Effects source files.

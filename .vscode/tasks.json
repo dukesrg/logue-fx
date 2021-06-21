@@ -1,0 +1,118 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build all",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": [
+                "make"
+            ],
+            "args": [
+                "-e",
+                "PLATFORMS='prologue minilogue-xd nutekt-digital'"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Build prologue units",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": [
+                "make"
+            ],
+            "args": [
+                "-e",
+                "PLATFORMS=prologue"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "Build minilogue XD units",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": [
+                "make"
+            ],
+            "args": [
+                "-e",
+                "PLATFORMS=minilogue-xd"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "Build NTS-1 units",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": [
+                "make"
+            ],
+            "args": [
+                "-e",
+                "PLATFORMS=nutekt-digital"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "Clean all",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": [
+                "make"
+            ],
+            "args": [
+                "clean"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "Load unit",
+            "command": [
+                "bash"
+            ],
+            "args": [
+                "${workspaceFolder}/.vscode/loadunit.sh",
+                "${file}"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "Update SVD files",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": [
+                "(test -f STM32F446.svd && test -f STM32F401.svd) || (wget https://www.st.com/resource/en/svd/stm32f4_svd.zip && unzip -jo stm32f4_svd.zip */STM32F446.svd */STM32F401.svd && rm stm32f4_svd.zip)"
+            ]
+        }
+    ]
+}

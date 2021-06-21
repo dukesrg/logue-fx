@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "logue-sdk",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "${workspaceFolder}/logue-sdk/tools/gcc/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "linux-gcc-arm",
+            "compilerArgs": []
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,420 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "name": "Debug NTS-1 FX/OSC (ST-LINK/OpenOCD)",
+            "preLaunchTask": "Build NTS-1 units",
+            "request": "attach",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug prologue FX (ST-LINK/OpenOCD)",
+            "preLaunchTask": "Build prologue units",
+            "request": "attach",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug prologue OSC (ST-LINK/OpenOCD)",
+            "preLaunchTask": "Build prologue units",
+            "request": "attach",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F401RC",
+            "svdFile": "${workspaceFolder}/STM32F401.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug minilogue XD FX (ST-LINK/OpenOCD)",
+            "preLaunchTask": "Build minilogue XD units",
+            "request": "attach",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug minilogue XD OSC (ST-LINK/OpenOCD)",
+            "preLaunchTask": "Build minilogue XD units",
+            "request": "attach",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "interface": "swd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F401RC",
+            "svdFile": "${workspaceFolder}/STM32F401.svd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug NTS-1 FX/OSC (ST-LINK/ST-Util)",
+            "preLaunchTask": "Build NTS-1 units",
+            "request": "attach",
+            "servertype": "stutil",
+            "v1": false,
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug prologue FX (ST-LINK/ST-Util)",
+            "preLaunchTask": "Build prologue units",
+            "request": "attach",
+            "servertype": "stutil",
+            "v1": false,
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug prologue OSC (ST-LINK/ST-Util)",
+            "preLaunchTask": "Build prologue units",
+            "request": "attach",
+            "servertype": "stutil",
+            "v1": false,
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F401RC",
+            "svdFile": "${workspaceFolder}/STM32F401.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug minilogue XD FX (ST-LINK/ST-Util)",
+            "preLaunchTask": "Build minilogue XD units",
+            "request": "attach",
+            "servertype": "stutil",
+            "v1": false,
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug minilogue XD OSC (ST-LINK/ST-Util)",
+            "preLaunchTask": "Build minilogue XD units",
+            "request": "attach",
+            "servertype": "stutil",
+            "v1": false,
+            "interface": "swd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F401RC",
+            "svdFile": "${workspaceFolder}/STM32F401.svd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug NTS-1 FX/OSC (J-Link/JLinkGDBServerCL)",
+            "preLaunchTask": "Build NTS-1 units",
+            "request": "attach",
+            "servertype": "jlink",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug prologue FX (J-Link/JLinkGDBServerCL)",
+            "preLaunchTask": "Build prologue units",
+            "request": "attach",
+            "servertype": "jlink",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug prologue OSC (J-Link/JLinkGDBServerCL)",
+            "preLaunchTask": "Build prologue units",
+            "request": "attach",
+            "servertype": "jlink",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F401RC",
+            "svdFile": "${workspaceFolder}/STM32F401.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug minilogue XD FX (J-Link/JLinkGDBServerCL)",
+            "preLaunchTask": "Build minilogue XD units",
+            "request": "attach",
+            "servertype": "jlink",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F446ZE",
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "interface": "swd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "name": "Debug minilogue XD OSC (J-Link/JLinkGDBServerCL)",
+            "preLaunchTask": "Build minilogue XD units",
+            "request": "attach",
+            "servertype": "jlink",
+            "interface": "swd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${relativeFile}",
+            "device": "STM32F401RC",
+            "svdFile": "${workspaceFolder}/STM32F401.svd",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 180000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console",
+                        "label": "SWO output",
+                        "encoding": "ascii",
+                    }
+                ]
+            }
+        }
+    ]
+}
